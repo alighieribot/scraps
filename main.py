@@ -21,7 +21,7 @@ def update():
         page = requests.get(URL, headers=headers)
         content = BeautifulSoup(page.content, "html.parser")
 
-        get_element = content.find("span", {"id": "productTitle"})
+        get_element = content.find("span", {"id": "id"})
         element = get_content(get_element)
         
         #header structure
