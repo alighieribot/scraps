@@ -12,7 +12,7 @@ def get_content(element):
     else:
         return 'NoneType'
 
-URL = 'https://www.amazon.com.br/HD-SSD-KINGSTON-SA400S37-480GB/dp/B075BKXSCQ/ref=sr_1_4?__mk_pt_BR=ÅMÅŽÕÑ'
+URL = 'URL'
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 OPR/99.0.4788.5"}
 
 def update():
@@ -21,21 +21,18 @@ def update():
         page = requests.get(URL, headers=headers)
         content = BeautifulSoup(page.content, "html.parser")
 
-        title_element = content.find("span", {"id": "productTitle"})
-        title = get_content(title_element)
-
-        price_element = content.find("span", {"class": "a-offscreen"})
-        price = get_content(price_element)
-
+        get_element = content.find("span", {"id": "productTitle"})
+        element = get_content(get_element)
+        
         #header structure
         today = datetime.date.today()
-        header = ['Title', 'Price', 'Date']
-        data = [title, price, today]
+        header = ['Element', 'Date']
+        data = [element, today]
         print(header)
         print(data)
 
         #export to csv
-        with open('AmazonWebScraperDataset.csv', 'a+', newline='', encoding='UTF8') as f:
+        with open('ScraperDataset.csv', 'a+', newline='', encoding='UTF8') as f:
             writer = csv.writer(f)
             writer.writerow(data)
 
